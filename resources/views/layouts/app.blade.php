@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Demo</title>
+    <meta charset="UTF-8">
+    <title>UTS Page</title>
 </head>
 <body>
-  @yield('content')  {{-- JANGAN pakai $slot di sini --}}
+    @include('layouts.header')
+
+    <main>
+        @yield('content')
+    </main>
+
+    @include('layouts.footer')
 </body>
 </html>

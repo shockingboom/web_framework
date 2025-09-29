@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UtsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,20 +20,38 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified', 'RoleCheck:admin'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 });
 
-Route::middleware(['auth','role:admin,owner'])->group(function () {
-    Route::get('/product/{num}', [ProductController::class, 'index'])
-        ->whereNumber('num')
-        ->name('product.index');
+// Basic route
+Route::get('/', function () {
+    return view('home');
+})->name('home');
+
+// Named route
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
+// Route dengan parameter opsional
+Route::get('/contact/{name?}', function ($name = 'Guest') {
+    return view('contact', ['name' => $name]);
+})->name('contact');
+
+// Route group dengan prefix
+Route::prefix('admin')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->middleware('auth')->name('dashboard');
 });
+
+Route::get('/uts', [UtsController::class, 'index'])->name('uts.index');
+Route::get('/uts/web', [UtsController::class, 'utsWeb'])->name('uts.web');
+Route::get('/uts/database', [UtsController::class, 'utsDatabase'])->name('uts.database');
+
+
 
 require __DIR__.'/auth.php';
