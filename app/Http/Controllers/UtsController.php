@@ -8,6 +8,7 @@ class UtsController extends Controller
 {
     public function index()
     {
+        //panggil index
         return view('uts.index');
     }
 
