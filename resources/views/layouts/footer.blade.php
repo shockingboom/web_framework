@@ -1,3 +1,3 @@
 <footer>
-    <p>&copy; 2025 Laravel UTS</p>
+    <p>&copy; Fajar Web Framework UTS</p>
 </footer>
