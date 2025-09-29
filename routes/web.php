@@ -48,9 +48,11 @@ Route::prefix('admin')->group(function () {
     })->middleware('auth')->name('dashboard');
 });
 
+
 Route::get('/uts', [UtsController::class, 'index'])->name('uts.index');
 Route::get('/uts/web', [UtsController::class, 'utsWeb'])->name('uts.web');
 Route::get('/uts/database', [UtsController::class, 'utsDatabase'])->name('uts.database');
+
 
 
 
