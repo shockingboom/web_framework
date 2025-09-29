@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2>Selamat Datang di Halaman UTS</h2>
+    <h2>Selamat Datang di Halaman UTS Web Framework</h2>
 @endsection
